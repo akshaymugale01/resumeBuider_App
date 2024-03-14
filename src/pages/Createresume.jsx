@@ -3,7 +3,7 @@ import React from 'react'
 const Createresume = () => {
   return (
     <div>
-      Hello
+      Hello How are
     </div>
   )
 }

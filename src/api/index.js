@@ -1,5 +1,7 @@
-import { collection, doc, onSnapshot, query, setDoc, orderBy } from "firebase/firestore";
+import { collection, doc, onSnapshot, query, setDoc, orderBy, arrayUnion, arrayRemove, updateDoc} from "firebase/firestore";
 import { auth, db } from "../config/firebaseConfig"
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const getUserDetail = () => {
     return new Promise((resolve, reject) => {
@@ -40,8 +42,58 @@ export const getTemplates = () => {
             const templates = querySnap.docs.map((doc) => doc.data());
             resolve(templates);
         });
-    
+
         return unsubscribe;
     });
 }
 
+export const saveToCollections = async (user, data) => {
+    if (!user?.collections?.includes(data?._id)) {
+        const docRef = doc(db, "users", user?.uid)
+
+        await updateDoc(docRef, {
+            collections: arrayUnion(data?._id)
+        })
+        .then(() => toast.success("Saved To Collections"))
+        .catch((err) => toast.error(`Error: ${err.message}`))
+    } else {
+        const docRef = doc(db, "users", user?.uid)
+
+        await updateDoc(docRef, {
+            collections: arrayRemove(data?._id)
+        })
+        .then(() => toast.success("Removed From Collections"))
+        .catch((err) => toast.error(`Error: ${err.message}`))
+    }
+};
+
+
+export const saveToFavourites = async (user, data) => {
+    if (!user?.favourites?.includes(user?.uid)) {
+        const docRef = doc(db, "templates", data?._id)
+
+        console.log("hello!")
+        await updateDoc(docRef, {
+            favourites: arrayUnion(user?.uid),
+        })
+        .then(() => toast.success("Favourites +"))
+        .catch((err) => toast.error(`Error: ${err.message}`))
+    } else {
+        const docRef = doc(db, "templates", data?._id)
+
+        await updateDoc(docRef, {
+            favourites : arrayRemove(user?.uid)
+        })
+        .then(() => toast.success("Removed From Favourites"))
+        .catch((err) => toast.error(`Error: ${err.message}`))
+    }
+}
+
+export const getTemplateDetails = async ( templateId ) => {
+    return new Promise ((resolve, reject) => {
+        const unsubscribe = onSnapshot(doc(db, "templates", templateId), (doc) => {
+            resolve(doc.data())
+        })
+        return unsubscribe;
+    })
+}

@@ -18,7 +18,10 @@ const Homescreen = () => {
             <Route path="/templete/create" element={<CreateTemplate />} /> 
             <Route path='/profile/:uid' element={<UserProfile />} />
             <Route path='/resume/*' element={<Createresume />}/>
-            <Route path='resumeDetail/:templateID' element={<TempleteDesignPinDetails />} />
+            <Route 
+             path='/resumeDetail/:templateID'
+             element={<TempleteDesignPinDetails />} 
+             />
           </Routes>
         </Suspense>
       </main>

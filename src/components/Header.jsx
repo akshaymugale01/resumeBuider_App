@@ -127,7 +127,7 @@ const Header = () => {
 
                         {
                           adminIds.includes(data?.uid) && (
-                            <Link className='text-gray-500 hover:text-green-500 text-base whitespace-nowrap' to={"/templete/create"}> Add NEW
+                            <Link className='text-gray-500 hover:text-green-500 text-base whitespace-nowrap' to={"/templete/create"}> Add New!
                             </Link>
                           )
                         }

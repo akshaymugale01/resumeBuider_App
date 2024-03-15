@@ -20,6 +20,7 @@ const App = () => {
           <Route path="/auth" element={<Authentication />} />
         </Routes>
       </Suspense>
+      <ToastContainer />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

@@ -51,6 +51,7 @@ export const saveToCollections = async (user, data) => {
     if (!user?.collections?.includes(data?._id)) {
         const docRef = doc(db, "users", user?.uid)
 
+        console.log(`Hello`, user)
         await updateDoc(docRef, {
             collections: arrayUnion(data?._id)
         })
@@ -67,16 +68,14 @@ export const saveToCollections = async (user, data) => {
     }
 };
 
-
 export const saveToFavourites = async (user, data) => {
-    if (!user?.favourites?.includes(user?.uid)) {
-        const docRef = doc(db, "templates", data?._id)
+    if (!data?.favourites?.includes(user?.uid)) {
+        const docRef =  doc(db, "templates", data?._id) 
 
-        console.log("hello!")
         await updateDoc(docRef, {
             favourites: arrayUnion(user?.uid),
         })
-        .then(() => toast.success("Favourites +"))
+        .then(() => toast.success("Added to Favourites"))
         .catch((err) => toast.error(`Error: ${err.message}`))
     } else {
         const docRef = doc(db, "templates", data?._id)
@@ -84,7 +83,7 @@ export const saveToFavourites = async (user, data) => {
         await updateDoc(docRef, {
             favourites : arrayRemove(user?.uid)
         })
-        .then(() => toast.success("Removed From Favourites"))
+        .then(() => toast.success("Removed from Favourites"))
         .catch((err) => toast.error(`Error: ${err.message}`))
     }
 }
@@ -97,3 +96,18 @@ export const getTemplateDetails = async ( templateId ) => {
         return unsubscribe;
     })
 }
+
+
+
+export const getTemplateDetailEditByUser = (uid, id) => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onSnapshot(
+        doc(db, "users", uid, "resumes", id),
+        (doc) => {
+          resolve(doc.data());
+        }
+      );
+  
+      return unsubscribe;
+    });
+  };

@@ -223,7 +223,7 @@ const CreateTemplate = () => {
                     <input
                       type="file"
                       className='w-0 h-0'
-                      accept='.jpeg,.jpg,.png'
+                      accept='.jpeg,.jpg,.png,.pdf'
                       onChange={handleFileSelect}
                     />
                   </label>

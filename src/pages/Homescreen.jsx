@@ -9,7 +9,7 @@ import TempleteDesignPinDetails from './TemplateDesignPinDetails';
 
 const Homescreen = () => {
   return (
-    <div className='w-full flex flex-col items-center justify-center'>
+    <div className='w-full flex flex-col items-center justify-center '>
       <Header />
       <main className='w-full'>
         <Suspense fallback={<MainSpinner />}> 

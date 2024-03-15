@@ -36,8 +36,10 @@ const RenderATemplate = ({ templates }) => {
   return (
     <React.Fragment>
       {templates && templates.length > 0 ? (
+        <React.Fragment>
         <AnimatePresence>
-          {templates.map((template, index) => (
+          { templates &&
+          templates.map((template, index) => (
             <TemplateDesignPin
               key={template?._id}
               data={template}
@@ -45,8 +47,11 @@ const RenderATemplate = ({ templates }) => {
             />
           ))}
         </AnimatePresence>
+        </React.Fragment>
       ) : (
+        <React.Fragment>
         <p>No data Found!</p>
+        </React.Fragment>
       )}
     </React.Fragment>
   );

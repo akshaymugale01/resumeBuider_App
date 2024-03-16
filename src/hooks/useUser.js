@@ -14,7 +14,7 @@ const useUser = () =>{
                 return userDetail;
             } catch (error) {
                if(!error.message.includes("not autharised")){
-                toast.error()
+                toast.error("Something Went Wrong!")
                } 
             }
         },

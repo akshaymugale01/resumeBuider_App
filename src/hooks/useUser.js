@@ -14,7 +14,7 @@ const useUser = () =>{
                 return userDetail;
             } catch (error) {
                if(!error.message.includes("not autharised")){
-                toast.error("Something Went Wrong..")
+                toast.error()
                } 
             }
         },
@@ -24,3 +24,4 @@ const useUser = () =>{
 }
 
 export default useUser;
+

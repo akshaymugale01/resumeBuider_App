@@ -123,7 +123,7 @@ const Header = () => {
                       {/* Menu */}
                       <div className='w-full flex-col items-start flex gap-8 pt-6'>
 
-                        <Link className='text-gray-500 hover:text-green-500  text-base whitespace-nowrap' to={"/profile"}> My Account </Link>
+                        <Link className='text-gray-500 hover:text-green-500  text-base whitespace-nowrap' to={`/profile/${data?.uid}`}> My Account </Link>
 
                         {
                           adminIds.includes(data?.uid) && (
